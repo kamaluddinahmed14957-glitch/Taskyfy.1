@@ -1,0 +1,6 @@
+{
+  "name": "Taskify - Micro-Task Earning App",
+  "description": "High-contrast dark theme micro-task earning application featuring daily bonuses, interactive video rewards, math challenges, lucky spin wheel, and cash redemption via bKash, Nagad, Mobile Recharge, and PayPal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
