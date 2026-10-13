@@ -1,0 +1,41 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Java JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Build Webview APK with Cordova
+        run: |
+          npm install -g cordova
+          cordova create taskifyApp com.taskify.earningapp Taskify
+          cd taskifyApp
+          cordova platform add android
+          rm -rf www/*
+          cp -r ../index.html www/index.html
+          cordova build android --debug
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Taskify-APK
+          path: taskifyApp/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          
